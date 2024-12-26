@@ -34,16 +34,21 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void Move(float value)
     {
-        //TODO move rigidbody forward/backward with value
+        //Vector3 moveDir = new Vector3(0, _rb.velocity.y, value * movespeed);
+        //_rb.velocity = moveDir;
+
+        _rb.velocity = transform.forward * movespeed * value;
     }
 
     private void Jump()
     {
         //TODO add force to rigidbody
+        _rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
     }
 
     private void Rotate(float value)
     {
         //TODO rotate rigidbody  or transform with value
+        transform.Rotate(Vector3.up,value * rotationspeed * Time.deltaTime);
     }
 }
