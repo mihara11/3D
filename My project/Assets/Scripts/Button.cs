@@ -10,11 +10,16 @@ public class Button : MonoBehaviour
 
     [SerializeField] private LayerMask triggerLayerMask;
 
+    private void Awake()
+    {
+        switchableObject.SetActive(!turnON);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (LayerMaskUtil.ContainsLayer(triggerLayerMask, other.gameObject.layer))
         {
-            switchableObject.SetActive(true);
+            switchableObject.SetActive(turnON);
         }
     }
 
@@ -22,7 +27,7 @@ public class Button : MonoBehaviour
     {
         if (LayerMaskUtil.ContainsLayer(triggerLayerMask, other.gameObject.layer))
         {
-            switchableObject.SetActive(false);
+            switchableObject.SetActive(!turnON);
         }
     }
 }
