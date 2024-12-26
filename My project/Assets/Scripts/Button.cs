@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private bool turnON;
+    [SerializeField] private GameObject switchableObject;
+
+    [SerializeField] private LayerMask triggerLayerMask;
+
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (LayerMaskUtil.ContainsLayer(triggerLayerMask, other.gameObject.layer))
+        {
+            switchableObject.SetActive(true);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        
+        if (LayerMaskUtil.ContainsLayer(triggerLayerMask, other.gameObject.layer))
+        {
+            switchableObject.SetActive(false);
+        }
     }
 }
