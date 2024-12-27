@@ -36,10 +36,10 @@ public class NewBehaviourScript : MonoBehaviour
 
     private void Move(float value)
     {
-        //Vector3 moveDir = new Vector3(0, _rb.velocity.y, value * movespeed);
-        //_rb.velocity = moveDir;
+        Vector3 direction = transform.forward * movespeed * value;
+        Vector3 combinedDirection = new Vector3(direction.x, _rb.velocity.y, direction.z);
 
-        _rb.velocity = transform.forward * movespeed * value;
+        _rb.velocity = combinedDirection;
     }
 
     private void Jump()
