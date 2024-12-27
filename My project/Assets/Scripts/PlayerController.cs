@@ -10,6 +10,8 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private float rotationspeed;
     [SerializeField] private float jumpforce;
     [SerializeField] private KeyCode jumpkey;
+    [SerializeField] private LayerMask coinMask;
+    [SerializeField] private Score playerScore;
 
     private Rigidbody _rb;
 
@@ -50,5 +52,17 @@ public class NewBehaviourScript : MonoBehaviour
     {
         //TODO rotate rigidbody  or transform with value
         transform.Rotate(Vector3.up,value * rotationspeed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (LayerMaskUtil.ContainsLayer(coinMask, other.gameObject.layer))
+        {
+            if (other.TryGetComponent(out Coin coin))
+            {
+                
+                other.gameObject.SetActive(false);
+            }
+        }
     }
 }
